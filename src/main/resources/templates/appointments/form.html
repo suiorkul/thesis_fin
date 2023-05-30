@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Appointments</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Дайындоону жазуу</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+        <li class="active">Дайындоону жазуу</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Дайындоо</h3>
+            <div class="box-tools pull-right">
+                <a href="/appointments" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form class="row-g-3" data-toggle="validator" role="form" th:object="${appointment}" th:action="@{/appointments/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="col-md-6">
+                    <label for="time">Убакыт</label>
+                    <input type="time" required="true" class="form-control" th:field="*{time}" id="time" />
+                </div>
+                <div class="col-md-6">
+                    <label for="date">Дата</label>
+                    <input type="date" required="true" class="form-control" th:field="*{date}" id="date" />
+                </div>
+                <div class="col-md-6">
+                    <label for="phoneNumber">Телефон номуру</label>
+                    <input type="number" required="true" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" />
+                </div>
+                <div class="col-md-6">
+                    <label for="doctor">Доктур</label>
+                    <select th:name="doctorId" id="doctor" required="true" class="form-control">
+                        <option th:each="row : ${doctors}" th:value="${row.id}"
+                                th:text="${row.getFirstname()} + ' ' + ${row.getLastname()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="patientId">Пациент</label>
+                    <select th:name="patientId" id="patientId" required="true" class="form-control">
+                        <option th:each="row : ${patients}" th:value="${row.id}"
+                                th:text="${row.getFirstname()} + ' ' + ${row.getLastname()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="deceased">Диагноз</label>
+                    <textarea required class="form-control" th:field="*{deceased}" id="deceased"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="address">Дареги</label>
+                    <textarea required class="form-control" th:field="*{address}" id="address"></textarea>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="submit">Сактоо</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

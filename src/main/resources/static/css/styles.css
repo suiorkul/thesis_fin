@@ -1,0 +1,70 @@
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+.edit-button {
+    border: 1px solid orange;
+    border-radius: 3px;
+    background-color: #f1ae3f;
+    padding: 3px 5px;
+    color: white;
+}
+
+.delete-button {
+    border: 1px solid red;
+    border-radius: 3px;
+    background-color: #f13f3f;
+    padding: 3px 5px;
+    color: white;
+}
+
+.hero {
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fblue-medical-background-featuring-medicine-background-and-clipboard--643733340486965118%2F&psig=AOvVaw24hLRtrx1tVKVKnPE7i3VE&ust=1685365571357000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNiWmpOKmP8CFQAAAAAdAAAAABAE");
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    color: #60a4dc;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Services section styles */
+.services {
+    padding: 40px;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}

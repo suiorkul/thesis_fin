@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Analyses</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<section layout:fragment="search">
+    <div class="form-group">
+        <h4><a href="/patients"><i class="fa fa-chevron-left" aria-hidden="true"></i> Артка</a></h4>
+    </div>
+</section>
+<section layout:fragment="header">
+    <h1 th:text="${firstName} + ' ' + ${lastName} + ' ' + ${patronymic}"></h1>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Анализдер</h3>
+            <div class="box-tools pull-right">
+                <a href="/analyses/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus fa-2x"></i></a>
+                <br clear="all"/>
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Катталган датасы</th>
+                    <th>Пациент</th>
+                    <th>Ачыктамасы</th>
+                    <th>Анализдер</th>
+                    <th>Даарылануу</th>
+                    <th>Статус</th>
+                    <th>Озгортуу</th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.created}"></td>
+                    <td th:text="${row.patient.firstName} + ' ' + ${row.patient.lastName} + ' ' + ${row.patient.patronymic}"></td>
+                    <td th:text="${row.description}"></td>
+                    <td><a target="_blank" th:text="${row.getDepartmentDocument().originalFileName()}" th:href="${row.getDepartmentDocument().fileUrl()}"><i class="fa fa-download" aria-hidden="true"></i></a></td>
+                    <td th:text="${row.treatment}"></td>
+                    <td th:text="${row.status.getLabel()}"></td>
+                    <td>
+                        <a class="edit-button" th:href="${'/analyses/edit/' + row.id}">Озгортуу</a>
+                        <a class="delete-button" th:if="${role} == 'ADMIN'" th:href="${'/analyses/delete/' + row.id}">Очуруу</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

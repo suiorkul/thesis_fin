@@ -1,0 +1,29 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar" th:fragment="sidebar" xmlns="http://www.w3.org/1999/html">
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+        <!-- <li class="header"></li> -->
+        <li th:if="${role} == 'ADMIN' or ${role} == 'RECEPTIONIST' or ${role} == 'DOCTOR'">
+            <a href="/patients" style="display: flex; column-gap: 5%"><i class="fa fa-user fa" aria-hidden="true"></i> <span> Пациенттер</span>
+            </a>
+        </li>
+        <li th:if="${role} == 'PATIENT'">
+            <a href="/patients" style="display: flex; column-gap: 5%"><i class="fa fa-user fa" aria-hidden="true"></i> <span> Анализдер</span>
+            </a>
+        </li>
+        <li>
+            <a href="/appointments" style="display: flex; column-gap: 5%"><i class="fa fa-calendar-check-o fa" aria-hidden="true"></i> <span> Дайындоолор</span>
+            </a>
+        </li>
+        <li th:if="${role} == 'ADMIN' or ${role} == 'RECEPTIONIST'">
+            <a href="/departments" style="display: flex; column-gap: 8%"><i class="fa fa-window-maximize fa" aria-hidden="true"></i> <span> Болумдор</span>
+            </a>
+        </li>
+        <li th:if="${role} == 'ADMIN'">
+            <a href="/users" style="display: flex; column-gap: 5%"><i class="fa fa-user-md fa" aria-hidden="true"></i> <span> Администрация</span>
+            </a>
+        </li>
+    </ul>
+    <!-- /.sidebar-menu -->
+</section>
+<!-- /.sidebar -->

@@ -1,0 +1,118 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Registration Patient</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Пациентти каттоо</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+        <li class="active">Пациентти каттоо</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Пациент</h3>
+            <div class="box-tools pull-right">
+                <a href="/patients" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form class="row-g-3" data-toggle="validator" role="form" th:object="${patient}" th:action="@{/patients/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+                    <div class="col-md-6">
+                            <label for="firstName">Аты</label>
+                            <input type="text" required="true" class="form-control" th:field="*{firstName}" id="firstName" />
+                    </div>
+                <div class="col-md-6">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" required="true" class="form-control" th:field="*{lastName}" id="lastName" />
+                </div>
+                <div class="col-md-6">
+                    <label for="patronymic">Атасынын аты</label>
+                    <input type="text" required="true" class="form-control" th:field="*{patronymic}" id="patronymic" />
+                </div>
+                <div class="col-md-6">
+                    <label for="username">Колдонуучунун аты</label>
+                    <input type="text" required="true" class="form-control" name="username" id="username" />
+                </div>
+                <div class="col-md-6">
+                    <label for="password">Пароль</label>
+                    <input type="text" required="true" class="form-control" name="password" id="password" />
+                </div>
+                <div class="col-md-6">
+                    <label for="sex">Жыныс</label>
+                    <select th:field="*{sex}" id="sex" required="true" class="form-control">
+                        <option th:value="'MALE'" th:text="Эркек"></option>
+                        <option th:value="'FEMALE'" th:text="Аял"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="email">Почта</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email" />
+                </div>
+                <div class="col-md-6">
+                    <label for="phoneNumber">Телефон номуру</label>
+                    <input type="text" placeholder="+996" value="+996" required="true" class="form-control" th:field="*{phoneNumber}" id="phoneNumber" />
+                </div>
+                <div class="col-md-6">
+                    <label for="dateOfBirth">Туулган күнү</label>
+                    <input type="date" required="true" class="form-control" th:field="*{dateOfBirth}" id="dateOfBirth" />
+                </div>
+                <div class="col-md-6">
+                    <label for="department">Болум</label>
+                    <select th:name="departmentName" id="department" required="true" class="form-control">
+                        <option th:each="row : ${departments}" th:value="${row.name}" th:text="${row.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="doctor">Доктур</label>
+                    <select th:name="doctorId" id="doctor" required="true" class="form-control">
+                        <option th:each="row : ${doctors}" th:value="${row.id}"
+                                th:text="${row.firstname} + ' ' + ${row.lastname}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="bloodType">Кандын группасы</label>
+                    <select th:name="bloodType" id="bloodType" required="true" class="form-control">
+                        <option th:each="type : ${T(com.example.qualitycontroll.dal.enums.BloodType).values()}" th:value="${type}"
+                                th:text="${type.label}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="materialStatus">Материалдык абалы</label>
+                    <select th:name="materialStatus" id="materialStatus" required="true" class="form-control">
+                        <option th:each="status : ${T(com.example.qualitycontroll.dal.enums.MaterialStatus).values()}" th:value="${status}"
+                                th:text="${status.label}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="cnic">CNIC</label>
+                    <input type="text" required="true" class="form-control" th:field="*{cnic}" id="cnic" />
+                </div>
+                <div class="col-md-6">
+                    <label for="city">Шаары</label>
+                    <textarea required class="form-control" th:field="*{city}" id="city"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="deceased">Диагноз</label>
+                    <textarea class="form-control" th:field="*{deceased}" id="deceased"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="address">Дареги</label>
+                    <textarea required class="form-control" th:field="*{address}" id="address"></textarea>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="submit">Сактоо</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

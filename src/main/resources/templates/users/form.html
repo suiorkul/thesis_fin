@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Registration Client</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Колдонуучуну каттоо</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+        <li class="active">Колдонуучуну каттоо</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Колдонуучу</h3>
+            <div class="box-tools pull-right">
+                <a href="/users" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${user}" th:action="@{/users/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-group">
+                    <label for="username">Колдонуучунун аты</label>
+                    <input type="text" required="true" class="form-control" th:field="*{username}" id="username" />
+                </div>
+                <div class="form-group">
+                    <label for="firstame">Аты</label>
+                    <input type="text" required="true" class="form-control" th:field="*{firstname}" id="firstame" />
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Фамилия</label>
+                    <input type="text" required="true" class="form-control" th:field="*{lastname}" id="lastname" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Почта</label>
+                    <input type="email" required="true" class="form-control" th:field="*{email}" id="email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="text" required="true" class="form-control" th:field="*{password}" id="password" />
+                </div>
+                <div class="form-group">
+                    <label for="salary">Маянасы</label>
+                    <input type="text" required="true" class="form-control" th:field="*{salary}" id="salary" />
+                </div>
+                <div class="form-group">
+                    <label for="education">Билими<</label>
+                    <input type="text" required="true" class="form-control" th:field="*{education}" id="education" />
+                </div>
+                <div class="form-group">
+                    <label for="expirience">Тажрыйба<</label>
+                    <input type="text" required="true" class="form-control" th:field="*{expirience}" id="expirience" />
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="department">Болумдор</label>-->
+<!--                    <select th:name="department" id="department" required="true" class="form-control">-->
+<!--                        <option th:each="row : ${T(com.example.qualitycontroll.dal.entity.Department.getName()}" th:value="${name}"-->
+<!--                                th:text="${row.getName}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+
+                <div class="form-group">
+                    <label for="role">Роль</label>
+                    <select th:field="*{role}" id="role" required="true" class="form-control">
+                        <option th:each="role : ${T(com.example.qualitycontroll.dal.enums.Role).values()}" th:value="${role}"
+                                th:text="${role.label}"></option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Сактоо</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+server:
+  port: 2023
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAU5JHNIYVZI6YZ55G
+      secret-key: 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
+    region:
+      static: us-east-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: clinic-storage
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  datasource:
+    password: ijfOdip3lqiNT103gdZYAg_EWkplOaIG
+    username: vwthsrbp
+    url: jdbc:postgresql://floppy.db.elephantsql.com:5432/vwthsrbp
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      encoding: UTF-8
+app:
+  cors:
+    allowed-origins: http://46.30.41.106:3000, http://localhost:3000
+
+logging:
+  level:
+    root: info

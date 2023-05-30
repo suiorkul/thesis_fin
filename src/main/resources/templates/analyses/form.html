@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Registration analyses</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Анализ жүктоо</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+        <li class="active">Анализ жүктөлүү</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Анализ</h3>
+            <div class="box-tools pull-right">
+                <a href="/analyses" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" enctype="multipart/form-data" role="form" th:object="${analysis}" th:action="@{/analyses/save}" method="post">
+            <div class="box-body">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="form-group">
+                    <label for="patient">Пациент</label>
+                    <select th:name="fio" id="patient" required="true" class="form-control">
+                        <option th:each="row : ${patients}" th:value="${row.firstName} + ' ' + ${row.lastName} + ' ' + ${row.patronymic}" th:text="${row.firstName} + ' ' + ${row.lastName} + ' ' + ${row.patronymic}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description"> Анализдер</label>
+                    <input type="text" class="form-control" th:field="*{description}" id="description" />
+                </div>
+                <div class="form-group">
+                    <label for="departmentDocument"> Анализдер</label>
+                    <input type="file" class="form-control" name="file1" id="departmentDocument" />
+                </div>
+                <div class="form-group">
+                    <label for="treatment"> Дарылануу</label>
+                    <textarea class="form-control" th:field="*{treatment}" id="treatment" />
+                </div>
+                <div class="form-group">
+                    <label for="status">Статус</label>
+                    <select th:field="*{status}" id="status" required="true" class="form-control">
+                        <option th:value="'REGISTERED'" th:text="Пациент + ' ' + катталган"></option>
+                        <option th:value="'SENT'" th:text="Анализ + ' ' + Түркияга + ' ' + жөнөтүлдү"></option>
+                        <option th:value="'RECEIVED'" th:text="Түркиядагы + ' ' + дарыгерлерден + ' ' + жооп + ' ' + алынды"></option>
+                        <option th:value="'NOTIFIED'" th:text="Пациентке + ' ' + анализ + ' ' + берилди"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Сактоо</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

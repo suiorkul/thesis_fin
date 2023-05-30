@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Колдонуучулар</h1>
+<ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+    <li class="active">Колдонуучулар</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Тизмеси</h3>
+            <div class="box-tools pull-right">
+                <a href="/users/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus fa-2x"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Колдонуучу</th>
+                    <th>Аты</th>
+                    <th>Фамилия</th>
+                    <th>Почта</th>
+                    <th>Катталган датасы</th>
+                    <th>Маянасы</th>
+                    <th>Билими</th>
+                    <th>Тажрыйбасы</th>
+<!--                    <th>Болуму</th>-->
+                    <th>Роль</th>
+
+                    <th>Озгортуу</th>
+
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.username}"></td>
+                    <td th:text="${row.firstname}"></td>
+                    <td th:text="${row.lastname}"></td>
+                    <td th:text="${row.email}"></td>
+                    <td th:text="${row.created}"></td>
+                    <td th:text="${row.salary}"></td>
+                    <td th:text="${row.education}"></td>
+                    <td th:text="${row.expirience}"></td>
+<!--                    <td th:text="${row.department}"></td>-->
+                    <td th:text="${row.role.getLabel()}"></td>
+
+
+
+                    <td>
+                        <a class="edit-button" th:href="${'/users/edit/' + row.id}">Озгортуу</a>
+                        <a class="delete-button" th:href="${'/users/delete/' + row.id}">Очуруу</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/users/1">Алгачкы</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/users/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/users/' + endIndex}">Акыркы</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

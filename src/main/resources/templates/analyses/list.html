@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Analyses</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Анализер</h1>
+<ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Куралдар тактасы</a></li>
+    <li class="active">Анализер</li>
+</ol>
+</section>
+<section layout:fragment="search">
+    <form data-toggle="validator" role="form" th:action="@{/search-analyses}" method="get">
+        <div class="form-group">
+            <select th:name="patient" id="department" class="form-control">
+                <option th:each="row : ${patients}" th:value="${row.firstName} + ' ' + ${row.lastName} + ' ' + ${row.patronymic}" th:text="${row.firstName} + ' ' + ${row.lastName} + ' ' + ${row.patronymic}"></option>
+            </select>
+        </div>
+        <div class="box-footer">
+            <button class="btn btn-primary" type="submit">Издоо</button>
+        </div>
+    </form>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Тизме</h3>
+            <div class="box-tools pull-right">
+                <a href="/analyses/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus fa-2x"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Пациент</th>
+                    <th>Ачыктамасы</th>
+                    <th>Анализдер</th>
+                    <th>Даарылануу</th>
+                    <th>Статус</th>
+                    <th>Катталган датасы</th>
+                    <th>Озгортуу</th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.patient.firstName} + ' ' + ${row.patient.lastName} + ' ' + ${row.patient.patronymic}"></td>
+                    <td th:text="${row.description}"></td>
+                    <td><a th:href="@{'/download/' + ${row.id} + '/department'}"><i class="fa fa-download" aria-hidden="true"></i> Жүктөп алуу</a></td>
+                    <td th:text="${row.treatment}"></td>
+                    <td th:text="${row.status.getLabel()}"></td>
+                    <td th:text="${row.created}"></td>
+                    <td>
+                        <a class="edit-button" th:href="${'/analyses/edit/' + row.id}">Озгортуу</a>
+                        <a class="delete-button" th:if="${role} == 'ADMIN'" th:href="${'/analyses/delete/' + row.id}">Очуруу</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--<div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/analyses/1">Алгачкы</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/analyses/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/analyses/' + endIndex}">Акыркы</a></li>
+            </ul>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

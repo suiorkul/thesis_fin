@@ -1,0 +1,65 @@
+server:
+  port: 2024
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAU5JHNIYVZI6YZ55G
+      secret-key: 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
+    region:
+      static: us-east-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: clinic-storage
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  datasource:
+    password: admin
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/clinic
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    default-schema: public
+    create-schemas: false
+    enabled: true
+    baseline-on-migrate: false
+  sql:
+    init:
+      encoding: UTF-8
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    protocol: smtp
+    username: gomemay24@gmail.com
+    password: 24091976awgn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+whatsapp:
+  instance:
+    chat-url: https://api.ultramsg.com/instance48702/messages/chat
+    document-url: https://api.ultramsg.com/instance48702/messages/document
+    token: ajyfz1gx4so5o4xt
+
+link:
+  url: 'http://localhost:2023/login'
+
+logging:
+  level:
+    root: info
